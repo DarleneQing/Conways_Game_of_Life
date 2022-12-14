@@ -36,6 +36,10 @@ public class GameControl {
 
         System.out.print("Player "+PlayerNr+ "please input a single capital letter from A-Z as your symbol: ");
         String playerSymbol = scanner.nextLine();
+        while (playerSymbol.length() < 1 || playerSymbol.length() > 2) {
+            System.out.print("Please type in some name: ");
+            playerSymbol = scanner.nextLine();
+        }
 
         return playerSymbol;
     }
