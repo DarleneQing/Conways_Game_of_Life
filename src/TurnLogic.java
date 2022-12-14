@@ -1,4 +1,4 @@
-public class TurnLogic {
+/* public class TurnLogic {
 
     public void countNeighbors(){
 
@@ -33,3 +33,4 @@ public class TurnLogic {
         }
     }
 }
+*/
