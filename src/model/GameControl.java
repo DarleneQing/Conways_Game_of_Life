@@ -2,9 +2,14 @@ package model;
 
 import exceptions.InvalidSize;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 public class GameControl {
+
+    private final List<Player> players = new ArrayList<>();
 
     public void setUpBoard(){
         Scanner scanner = new Scanner(System.in);
@@ -36,10 +41,22 @@ public class GameControl {
         }
     }
 
-    public String getPlayerNameAndSymbol(int PlayerNr) {
+    public void setUpPlayer(){
+        int numplayer = 2;
+
+        for (int i = 0; i < numplayer; i++) {
+            String playername = getPlayerName();
+            String playersymbol = getPlayerSymbol();
+            players.add(new Player(playername, playersymbol));
+        }
+
+        players.sort(Comparator.comparing(Player::getName));
+    }
+
+    public String getPlayerName() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Player " + PlayerNr+ ":, please input your name: ");
+        System.out.print("please input your name: ");
         String playerName = scanner.nextLine();
         while (playerName.length() < 1) {
             System.out.print("Please type in some name: ");
@@ -49,17 +66,16 @@ public class GameControl {
         return playerName;
     }
 
-    public String getPlayerSymbol(int PlayerNr){
-        Scanner scanner = new Scanner(System.in);
+    public String getPlayerSymbol() {
+            Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Player "+PlayerNr+ "please input a single capital letter from A-Z as your symbol: ");
-        String playerSymbol = scanner.nextLine();
-        while (playerSymbol.length() < 1 || playerSymbol.length() > 2) {
-            System.out.print("Please type in some name: ");
-            playerSymbol = scanner.nextLine();
-        }
+            System.out.print("please input a single capital letter from A-Z as your symbol: ");
+            String playerSymbol = scanner.nextLine();
+            while (playerSymbol.length() < 1 || playerSymbol.length() > 2) {
+                System.out.print("Please type in some name: ");
+                playerSymbol = scanner.nextLine();
+            }
 
-        return playerSymbol;
+            return playerSymbol;
     }
-
 }
