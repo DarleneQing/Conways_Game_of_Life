@@ -8,6 +8,6 @@ public class Grid {
         if (rows < 10 || rows > 100 || cols < 10 || cols > 100){
             throw new InvalidSize();
         }
-        System.out.println(rows + "," + cols);
+        System.out.println("The grid has " + rows + " rows and " + cols + " columns.");
     }
 }

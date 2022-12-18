@@ -9,7 +9,12 @@ import java.util.Scanner;
 
 public class GameControl {
 
+    private final int numPlayers;
     private final List<Player> players = new ArrayList<>();
+
+    public GameControl() {
+        this.numPlayers = 2;
+    }
 
     public void setUpBoard(){
         Scanner scanner = new Scanner(System.in);
@@ -42,9 +47,7 @@ public class GameControl {
     }
 
     public void setUpPlayers(){
-        int numplayer = 2;
-
-        for (int i = 0; i < numplayer; i++) {
+        for (int i = 0; i < numPlayers; i++) {
             String playername = getPlayerName();
             String playersymbol = getPlayerSymbol();
             players.add(new Player(playername, playersymbol));
