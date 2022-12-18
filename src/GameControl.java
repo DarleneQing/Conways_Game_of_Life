@@ -1,21 +1,35 @@
 import java.util.Scanner;
 
 public class GameControl {
-    private int rows;
-    private int cols;
-    private static int[][] grid;
 
-    public void setUpBoard() {
+    public void setUpBoard(){
         Scanner scanner = new Scanner(System.in);
 
         // Read the size of the grid
-        System.out.print("Enter the number of rows(numbers between 10-40): ");
-        rows = scanner.nextInt();
-        System.out.print("Enter the number of columns(numbers between 10-40): ");
-        cols = scanner.nextInt();
+        System.out.print("Enter the number of rows(an integer between 10-100): ");
+        while(!scanner.hasNextInt()){
+            System.out.println("Invalid input. Please input an integer between 10-100.");
+            System.out.print("Enter the number of rows(an integer between 10-100): ");
+            scanner.nextLine();
+        }
+        int rows = scanner.nextInt();
 
-        // Create the grid
-        grid = new int[rows][cols];
+        System.out.print("Enter the number of columns(a number between 10-100): ");
+        while(!scanner.hasNextInt()){
+            System.out.println("Invalid input. Please input an integer between 10-100.");
+            System.out.print("Enter the number of rows(an integer between 10-100): ");
+            scanner.nextLine();
+        }
+        int cols = scanner.nextInt();
+
+        // Setup
+        try{
+            Grid grid = new Grid(rows, cols);
+        }
+        catch (InvalidSize e) {
+            System.out.println("Invalid input. Please input an integer between 10-100.");
+            setUpBoard();
+        }
     }
 
     public String getPlayerNameAndSymbol(int PlayerNr) {
