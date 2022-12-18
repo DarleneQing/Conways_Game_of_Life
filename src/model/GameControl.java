@@ -78,4 +78,8 @@ public class GameControl {
 
             return playerSymbol;
     }
+
+    public void playGame(){
+
+    }
 }

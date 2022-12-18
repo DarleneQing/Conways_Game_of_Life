@@ -1,10 +1,12 @@
-/* public class TurnLogic {
+package model;
+
+public class TurnLogic {
 
     public void countNeighbors(){
 
     }
 
-    // 别的地方看到的例子 仅供参考
+    /* 别的地方看到的例子 仅供参考
     public void update() {
         // loop through each cell in the grid
         for (int y = 0; y < row; y++) {
@@ -31,6 +33,5 @@
                 board[y][x] = next[x][x];
             }
         }
-    }
+    }*/
 }
-*/
