@@ -41,7 +41,7 @@ public class GameControl {
         }
     }
 
-    public void setUpPlayer(){
+    public void setUpPlayers(){
         int numplayer = 2;
 
         for (int i = 0; i < numplayer; i++) {
@@ -71,8 +71,9 @@ public class GameControl {
 
             System.out.print("please input a single capital letter from A-Z as your symbol: ");
             String playerSymbol = scanner.nextLine();
-            while (playerSymbol.length() < 1 || playerSymbol.length() > 2) {
-                System.out.print("Please type in some name: ");
+            char c = playerSymbol.charAt(0);
+            while (playerSymbol.length() < 1 || playerSymbol.length() > 2 || !Character.isUpperCase(c)) {
+                System.out.print("Please type in a correct symbol: ");
                 playerSymbol = scanner.nextLine();
             }
 
