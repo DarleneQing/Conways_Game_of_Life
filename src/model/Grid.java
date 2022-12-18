@@ -4,10 +4,33 @@ import exceptions.InvalidSize;
 
 public class Grid {
 
-    public Grid(int rows, int cols) throws InvalidSize {
-        if (rows < 10 || rows > 100 || cols < 10 || cols > 100){
-            throw new InvalidSize();
-        }
-        System.out.println("The grid has " + rows + " rows and " + cols + " columns.");
+    private String symbol;
+    private GridStatus status;
+    private int[][] position;
+
+
+    enum GridStatus{
+        ALIVE,
+        DEAD
     }
+
+    public Grid(String grid_symbol, GridStatus status, int[][] position){
+        this.symbol = grid_symbol;
+        this.status = status;
+        this.position = position;
+    }
+
+    public String getGridSymbol(){
+        return symbol;
+    }
+
+    public GridStatus getGridStatus(){
+        return status;
+    }
+
+    public int[][] getGridPosition(){
+        return position;
+    }
+
+
 }
