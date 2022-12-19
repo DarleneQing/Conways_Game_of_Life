@@ -11,7 +11,6 @@ public class Game {
 
     private final List<Player> players = new ArrayList<>();
     private final int numPlayers;
-    private GameBoard aGameBoard;
 
     public Game() {
         this.numPlayers = 2;
@@ -39,12 +38,12 @@ public class Game {
 
         // Setup
         try{
-            aGameBoard = new GameBoard(rows, cols);
+            GameBoard aGameBoard = new GameBoard(rows, cols);
             aGameBoard.gridBoard();
-            aGameBoard.displayBoard(rows, cols);
+            aGameBoard.displayBoard();
         }
         catch (InvalidSize e) {
-            System.out.println("Invalid input. Please input an integer between 10-100.");
+            System.out.println("Invalid input. Please input integers between 10-100.");
             setUpBoard();
         }
     }
