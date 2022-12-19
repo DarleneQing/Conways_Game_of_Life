@@ -10,8 +10,12 @@ import java.util.Scanner;
 public class Game {
 
     private final List<Player> players = new ArrayList<>();
-
+    private final int numPlayers;
     private GameBoard aGameBoard;
+
+    public Game() {
+        this.numPlayers = 2;
+    }
 
     public void setUpBoard(){
         Scanner scanner = new Scanner(System.in);
@@ -46,9 +50,7 @@ public class Game {
     }
 
     public void setUpPlayers(){
-        int num_player = 2;
-
-        for (int i = 0; i < num_player; i++) {
+        for (int i = 0; i < numPlayers; i++) {
             String player_name = getPlayerName();
             String player_symbol = getPlayerSymbol();
             players.add(new Player(player_name, player_symbol));

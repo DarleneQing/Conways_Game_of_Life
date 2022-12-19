@@ -8,7 +8,6 @@ import static model.Grid.GridStatus;
 
 public class GameBoard {
     private final int rows;
-
     private final int cols;
     private final ArrayList<ArrayList<Grid>> game_board = new ArrayList<>();
 
