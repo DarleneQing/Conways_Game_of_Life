@@ -34,7 +34,6 @@ public class GameBoard {
         }
     }
 
-
     public void displayBoard(){
         System.out.println("Here is your game board:");
 
