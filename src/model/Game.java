@@ -8,12 +8,49 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Game {
-
     private final List<Player> players = new ArrayList<>();
     private final int numPlayers;
 
     public Game() {
         this.numPlayers = 2;
+    }
+
+    public void setUpPlayers(){
+        System.out.println("Rules for inputting names: Please input your first name, middle names(optional) and last name, using upper-case for first letters. Please use a whitespace to separate them)");
+        for (int i = 0; i < this.numPlayers; i++) {
+            String player_name = getPlayerName(i+1);
+            String player_symbol = getPlayerSymbol();
+            players.add(new Player(player_name, player_symbol));
+        }
+        players.sort(Comparator.comparing(Player::getName));
+    }
+
+    public String getPlayerName(int num){
+        Scanner scanner = new Scanner(System.in);
+
+        // Read the name of players
+        System.out.print("please input name " + num + ": ");
+        String playerName = scanner.nextLine();
+        while(!playerName.matches("[A-Z][a-z]+(\s[A-Z][a-z]*)*\s[A-Z][a-z]+")){
+            System.out.print("Please input a valid name according to the rules: ");
+            playerName = scanner.nextLine();
+        }
+
+        return playerName;
+    }
+
+    public String getPlayerSymbol() {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("please input a single capital letter from A-Z as your symbol: ");
+            String playerSymbol = scanner.nextLine();
+            char c = playerSymbol.charAt(0);
+            while (playerSymbol.length() < 1 || playerSymbol.length() > 2 || !Character.isUpperCase(c)) {
+                System.out.print("Please type in a correct symbol: ");
+                playerSymbol = scanner.nextLine();
+            }
+
+            return playerSymbol;
     }
 
     public void setUpBoard(){
@@ -41,44 +78,6 @@ public class Game {
         }
     }
 
-    public void setUpPlayers(){
-        for (int i = 0; i < numPlayers; i++) {
-            String player_name = getPlayerName();
-            String player_symbol = getPlayerSymbol();
-            players.add(new Player(player_name, player_symbol));
-        }
-
-        players.sort(Comparator.comparing(Player::getName));
-    }
-
-    public String getPlayerName(){
-        Scanner scanner = new Scanner(System.in);
-
-        // Read the name of players
-        System.out.print("please input your name: ");
-
-        String playerName = scanner.nextLine();
-        while (playerName.length() < 1) {
-            System.out.print("Name can't be empty, please input a valid name: ");
-            playerName = scanner.nextLine();
-        }
-
-        return playerName;
-    }
-
-    public String getPlayerSymbol() {
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.print("please input a single capital letter from A-Z as your symbol: ");
-            String playerSymbol = scanner.nextLine();
-            char c = playerSymbol.charAt(0);
-            while (playerSymbol.length() < 1 || playerSymbol.length() > 2 || !Character.isUpperCase(c)) {
-                System.out.print("Please type in a correct symbol: ");
-                playerSymbol = scanner.nextLine();
-            }
-
-            return playerSymbol;
-    }
 
     public void initialPattern(){
 
