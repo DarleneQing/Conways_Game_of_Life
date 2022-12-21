@@ -17,7 +17,7 @@ public class GameBoard {
     }
 
     public void gridBoard() throws InvalidSize{
-        if (this.rows < 10 || this.rows > 100 || this.cols < 10 || this.cols > 100){
+        if (this.rows < 10 || this.rows > 50){
             throw new InvalidSize();
         }
         System.out.println("The grid has " + rows + " rows and " + cols + " columns.");

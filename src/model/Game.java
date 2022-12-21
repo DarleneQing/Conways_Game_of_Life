@@ -20,21 +20,14 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
 
         // Read the size of the grid
-        System.out.print("Enter the number of rows(an integer between 10-100): ");
+        System.out.print("Enter the number of rows(an integer between 10-50): ");
         while(!scanner.hasNextInt()){
-            System.out.println("Invalid input. Please input an integer between 10-100.");
-            System.out.print("Enter the number of rows(an integer between 10-100): ");
+            System.out.println("Invalid input. Please input an integer between 10-50.");
+            System.out.print("Enter the number of rows(an integer between 10-50): ");
             scanner.nextLine();
         }
         int rows = scanner.nextInt();
-
-        System.out.print("Enter the number of columns(a number between 10-100): ");
-        while(!scanner.hasNextInt()){
-            System.out.println("Invalid input. Please input an integer between 10-100.");
-            System.out.print("Enter the number of rows(an integer between 10-100): ");
-            scanner.nextLine();
-        }
-        int cols = scanner.nextInt();
+        int cols = 2 * rows;
 
         // Setup
         try{
@@ -43,7 +36,7 @@ public class Game {
             aGameBoard.displayBoard();
         }
         catch (InvalidSize e) {
-            System.out.println("Invalid input. Please input integers between 10-100.");
+            System.out.println("Invalid input. Please input an integer between 10-50.");
             setUpBoard();
         }
     }
@@ -58,13 +51,15 @@ public class Game {
         players.sort(Comparator.comparing(Player::getName));
     }
 
-    public String getPlayerName() {
+    public String getPlayerName(){
         Scanner scanner = new Scanner(System.in);
 
+        // Read the name of players
         System.out.print("please input your name: ");
+
         String playerName = scanner.nextLine();
         while (playerName.length() < 1) {
-            System.out.print("Please type in some name: ");
+            System.out.print("Name can't be empty, please input a valid name: ");
             playerName = scanner.nextLine();
         }
 
