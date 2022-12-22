@@ -2,27 +2,55 @@ package model;
 
 import exceptions.InvalidSize;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Game {
     private final List<Player> players = new ArrayList<>();
     private final int numPlayers;
+    private final boolean colorornot;
 
     public Game() {
         this.numPlayers = 2;
+        this.colorornot = getPlayerSymbolorColor();
     }
 
     public void setUpPlayers(){
         System.out.println("Rules for inputting names: Please input your first name, middle names(optional) and last name, using upper-case for first letters. Please use a whitespace to separate them)");
-        for (int i = 0; i < this.numPlayers; i++) {
-            String player_name = getPlayerName(i+1);
-            String player_symbol = getPlayerSymbol();
-            players.add(new Player(player_name, player_symbol));
+        if (!this.colorornot) {
+            for (int i = 0; i < this.numPlayers; i++) {
+                String player_name = getPlayerName(i + 1);
+                String player_symbol = getPlayerSymbol();
+                players.add(new PlayeruseSymbol(player_name, player_symbol));
+            }
         }
+        else{
+            for (int i = 0; i < this.numPlayers; i++) {
+                String player_name = getPlayerName(i + 1);
+                String player_color = getPlayerColor();
+                players.add(new PlayeruseColor(player_name, player_color));
+            }
+        }
+
+        if (Objects.equals(players.get(0).getName(), players.get(1).getName())){
+            System.out.println("The name of 2 players could not be the same!");
+            setUpPlayers();
+        }
+
         players.sort(Comparator.comparing(Player::getName));
+    }
+
+    public boolean getPlayerSymbolorColor(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Do you want to use different symbols or different colors to distinguish from each other? Please input 'symbol' or 'color':");
+        String SymbolorColor = scanner.nextLine();
+        while (!Objects.equals(SymbolorColor, "symbol") && !Objects.equals(SymbolorColor, "color")){
+            System.out.print("Please select from 'symbol' and 'color':");
+            SymbolorColor = scanner.nextLine();
+        }
+
+        // symbol: 0, color: 1
+        return SymbolorColor.equals("color");
     }
 
     public String getPlayerName(int num){
@@ -31,7 +59,7 @@ public class Game {
         // Read the name of players
         System.out.print("please input name " + num + ": ");
         String playerName = scanner.nextLine();
-        while(!playerName.matches("[A-Z][a-z]+(\s[A-Z][a-z]*)*\s[A-Z][a-z]+")){
+        while(!playerName.matches("([A-Z][a-z]*\\s)+[A-Z][a-z]*")){
             System.out.print("Please input a valid name according to the rules: ");
             playerName = scanner.nextLine();
         }
@@ -40,17 +68,32 @@ public class Game {
     }
 
     public String getPlayerSymbol() {
-            Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-            System.out.print("please input a single capital letter from A-Z as your symbol: ");
-            String playerSymbol = scanner.nextLine();
-            char c = playerSymbol.charAt(0);
-            while (playerSymbol.length() < 1 || playerSymbol.length() > 2 || !Character.isUpperCase(c)) {
-                System.out.print("Please type in a correct symbol: ");
-                playerSymbol = scanner.nextLine();
-            }
+        System.out.print("Please input a single sign as your symbol (not letters or numbers): ");
+        String playerSymbol = scanner.nextLine();
+        while (!playerSymbol.matches("\\W")) {
+            System.out.print("Please type in a correct symbol: ");
+            playerSymbol = scanner.nextLine();
+        }
 
-            return playerSymbol;
+        return playerSymbol;
+    }
+
+    public String getPlayerColor(){
+        Scanner scanner = new Scanner(System.in);
+        List<String> colorList = new ArrayList<>(6);
+        colorList.add("red"); colorList.add("green"); colorList.add("yellow");
+        colorList.add("blue"); colorList.add("cran"); colorList.add("purple");
+
+        System.out.print("Please input a color from the color list: 'red', 'green', 'yellow', 'blue', 'cran', 'purple': ");
+        String playerColor = scanner.nextLine();
+        while (!colorList.contains(playerColor)) {
+            System.out.print("Please type in a correct color: ");
+            playerColor = scanner.nextLine();
+        }
+
+        return playerColor;
     }
 
     public void setUpBoard(){
