@@ -42,8 +42,8 @@ public class GameBoard {
                     game_board.get(i).set(this.cols-j-1, new Grid(symbol2, " ", GridStatus.ALIVE_2));
                 }
                 else{
-                    game_board.get(i).set(j, new Grid(" ", color1, GridStatus.ALIVE_1));
-                    game_board.get(i).set(this.cols-j-1, new Grid(" ", color2, GridStatus.ALIVE_2));
+                    game_board.get(i).set(j, new Grid(symbol1, color1, GridStatus.ALIVE_1));
+                    game_board.get(i).set(this.cols-j-1, new Grid(symbol1, color2, GridStatus.ALIVE_2));
                 }
             }
         }
@@ -80,22 +80,22 @@ public class GameBoard {
                 }
                 else{
                     if (Objects.equals(aGrid.getGridColor(), "red")){
-                        System.out.print("\u001B[31m" + "*" + "\u001B[0m" + " |");
+                        System.out.print("\u001B[31m" + aGrid.getGridSymbol() + "\u001B[0m" + " |");
                     }
                     else if (Objects.equals(aGrid.getGridColor(), "green")){
-                        System.out.print("\u001B[32m" + "*" + "\u001B[0m" + " |");
+                        System.out.print("\u001B[32m" + aGrid.getGridSymbol() + "\u001B[0m" + " |");
                     }
                     else if (Objects.equals(aGrid.getGridColor(), "yellow")){
-                        System.out.print("\u001B[33m" + "*" + "\u001B[0m" + " |");
+                        System.out.print("\u001B[33m" + aGrid.getGridSymbol() + "\u001B[0m" + " |");
                     }
                     else if (Objects.equals(aGrid.getGridColor(), "blue")){
-                        System.out.print("\u001B[34m" + "*" + "\u001B[0m" + " |");
+                        System.out.print("\u001B[34m" + aGrid.getGridSymbol() + "\u001B[0m" + " |");
                     }
                     else if (Objects.equals(aGrid.getGridColor(), "purple")){
-                        System.out.print("\u001B[35m" + "*" + "\u001B[0m" + " |");
+                        System.out.print("\u001B[35m" + aGrid.getGridSymbol() + "\u001B[0m" + " |");
                     }
                     else if (Objects.equals(aGrid.getGridColor(), "cran")){
-                        System.out.print("\u001B[36m" + "*" + "\u001B[0m" + " |");
+                        System.out.print("\u001B[36m" + aGrid.getGridSymbol() + "\u001B[0m" + " |");
                     }
                     else{
                         System.out.print("  |");
