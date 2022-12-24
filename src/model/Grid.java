@@ -2,24 +2,20 @@ package model;
 
 public class Grid {
 
-    private final boolean colorornot;
-    private final String symbol;
-    private final String color;
-    private final GridStatus status;
-    private final int[][] position;
+    private String symbol;
+    private String color;
+    private GridStatus status;
 
-    enum GridStatus{
+    public enum GridStatus{
         ALIVE_1,
         ALIVE_2,
         DEAD
     }
 
-    public Grid(boolean colorornot, String grid_symbol, String grid_color, GridStatus status, int[][] position){
-        this.colorornot = colorornot;
+    public Grid(String grid_symbol, String grid_color, GridStatus status){
         this.symbol = grid_symbol;
         this.color = grid_color;
         this.status = status;
-        this.position = position;
     }
 
     public String getGridSymbol(){
@@ -34,7 +30,11 @@ public class Grid {
         return status;
     }
 
-    public int[][] getGridPosition(){
-        return position;
+    public void SetGridSymbol(String symbol){
+        this.symbol = symbol;
+    }
+
+    public void SetGridColor(String color){
+        this.color = color;
     }
 }

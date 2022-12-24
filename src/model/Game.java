@@ -1,13 +1,14 @@
 package model;
 
 import exceptions.InvalidSize;
+import model.GameBoard;
 
 import java.util.*;
 
 public class Game {
-    private final List<Player> players = new ArrayList<>();
     private final int numPlayers;
     private final boolean colorornot;
+    private final List<Player> players = new ArrayList<>();
 
     public Game() {
         this.numPlayers = 2;
@@ -22,6 +23,11 @@ public class Game {
                 String player_symbol = getPlayerSymbol();
                 players.add(new PlayeruseSymbol(player_name, player_symbol));
             }
+            if (Objects.equals(players.get(0).getSymbol(), players.get(1).getSymbol())){
+                System.out.println("The symbol of 2 players could not be the same!");
+                players.clear();
+                setUpPlayers();
+            }
         }
         else{
             for (int i = 0; i < this.numPlayers; i++) {
@@ -29,10 +35,16 @@ public class Game {
                 String player_color = getPlayerColor();
                 players.add(new PlayeruseColor(player_name, player_color));
             }
+            if (Objects.equals(players.get(0).getColor(), players.get(1).getColor())){
+                System.out.println("The color of 2 players could not be the same!");
+                players.clear();
+                setUpPlayers();
+            }
         }
 
         if (Objects.equals(players.get(0).getName(), players.get(1).getName())){
             System.out.println("The name of 2 players could not be the same!");
+            players.clear();
             setUpPlayers();
         }
 
@@ -112,18 +124,13 @@ public class Game {
         // Setup
         try{
             GameBoard aGameBoard = new GameBoard(rows, cols);
-            aGameBoard.gridBoard();
-            aGameBoard.displayBoard();
+            aGameBoard.gridBoard(colorornot, players.get(0).getSymbol(), players.get(1).getSymbol(), players.get(0).getColor(), players.get(1).getColor());
+            aGameBoard.displayBoard(colorornot);
         }
         catch (InvalidSize e) {
             System.out.println("Invalid input. Please input an integer between 10-50.");
             setUpBoard();
         }
-    }
-
-
-    public void initialPattern(){
-
     }
 
     public void playGame(){
