@@ -146,13 +146,8 @@ public class Game {
 
         while (player1.getNumCells()>0 && player2.getNumCells()>0){
             for(int i = 0; i < this.numPlayers; i++){
-                try {
-                    attack(i);
-                }
-                catch (InvalidAttack e) {
-                    System.out.println("Invalid input. Please input the coordinate of one of your opponent's cells");
-                    attack(i);
-                }
+                tryattack(i);
+
 
 
                 int num1 = 0;
@@ -175,6 +170,15 @@ public class Game {
         }
     }
 
+    public void tryattack(int i) throws InvalidAttack {
+        try {
+            attack(i);
+        }
+        catch (InvalidAttack e) {
+            System.out.println("Invalid input. Please input the coordinate of one of your opponent's cells");
+            tryattack(i);
+        }
+    }
 
     public void attack(int i) throws InvalidAttack {
         Scanner scanner = new Scanner(System.in);
