@@ -106,4 +106,8 @@ public class GameBoard {
         }
     }
 
+    public Grid GetContent(int row, int col){
+        return this.game_board.get(row).get(col);
+    }
+
 }

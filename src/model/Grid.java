@@ -30,6 +30,10 @@ public class Grid {
         return status;
     }
 
+    public void SetGridStatus(GridStatus status){
+        this.status = status;
+    }
+
     public void SetGridSymbol(String symbol){
         this.symbol = symbol;
     }
