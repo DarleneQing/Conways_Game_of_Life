@@ -21,7 +21,7 @@ public class GameBoard {
         if (this.rows < 10 || this.rows > 50){
             throw new InvalidSize();
         }
-        System.out.println("The grid has " + rows + " rows and " + cols + " columns.");
+        System.out.println("The grid has " + this.rows + " rows and " + this.cols + " columns.");
 
         int i, j;
         for (i = 0; i < this.rows; i++) {
@@ -31,19 +31,19 @@ public class GameBoard {
                 Grid aGrid = new Grid(" ", " ", GridStatus.DEAD);
                 row.add(aGrid);
             }
-            game_board.add(row);
+            this.game_board.add(row);
         }
 
         // Initial Pattern
         for (i = this.rows/2-1; i < this.rows/2+1; i++){
             for (j = (this.cols/2)/2-1; j < (this.cols/2)/2+1; j++){
                 if (!colorornot){
-                    game_board.get(i).set(j, new Grid(symbol1, " ", GridStatus.ALIVE_1));
-                    game_board.get(i).set(this.cols-j-1, new Grid(symbol2, " ", GridStatus.ALIVE_2));
+                    this.game_board.get(i).set(j, new Grid(symbol1, " ", GridStatus.ALIVE_1));
+                    this.game_board.get(i).set(this.cols-j-1, new Grid(symbol2, " ", GridStatus.ALIVE_2));
                 }
                 else{
-                    game_board.get(i).set(j, new Grid(symbol1, color1, GridStatus.ALIVE_1));
-                    game_board.get(i).set(this.cols-j-1, new Grid(symbol1, color2, GridStatus.ALIVE_2));
+                    this.game_board.get(i).set(j, new Grid(symbol1, color1, GridStatus.ALIVE_1));
+                    this.game_board.get(i).set(this.cols-j-1, new Grid(symbol1, color2, GridStatus.ALIVE_2));
                 }
             }
         }
@@ -73,7 +73,7 @@ public class GameBoard {
                 System.out.print(i+1 + "|");
             }
             for (int j = 0; j < this.cols; j++){
-                Grid aGrid = game_board.get(i).get(j);
+                Grid aGrid = this.game_board.get(i).get(j);
                 if (!colorornot){
                     String this_symbol = aGrid.getGridSymbol();
                     System.out.print(this_symbol+" |");

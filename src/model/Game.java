@@ -1,6 +1,7 @@
 package model;
 
 import exceptions.InvalidAttack;
+import exceptions.InvalidNewCell;
 import exceptions.InvalidSize;
 import static model.Grid.GridStatus;
 
@@ -20,7 +21,7 @@ public class Game {
     }
 
     public void setUpPlayers(){
-        System.out.println("Rules for inputting names: Please input your first name, middle names(optional) and last name, using upper-case for first letters. Please use a whitespace to separate them)");
+        System.out.println("Rules for inputting names: Please input your first name, middle names(optional) and last name, using upper-case for first letters. Please use a whitespace to separate them.");
         if (!this.colorornot) {
             for (int i = 0; i < this.numPlayers; i++) {
                 String player_name = getPlayerName(i + 1);
@@ -58,10 +59,10 @@ public class Game {
     public boolean getPlayerSymbolorColor(){
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Do you want to use different symbols or different colors to distinguish from each other? Please input 'symbol' or 'color':");
+        System.out.print("Do you want to use different symbols or different colors to distinguish from each other? Please input 'symbol' or 'color': ");
         String SymbolorColor = scanner.nextLine();
         while (!Objects.equals(SymbolorColor, "symbol") && !Objects.equals(SymbolorColor, "color")){
-            System.out.print("Please select from 'symbol' and 'color':");
+            System.out.print("Please select from 'symbol' and 'color': ");
             SymbolorColor = scanner.nextLine();
         }
 
@@ -128,8 +129,8 @@ public class Game {
         // Setup
         try{
             this.aGameBoard = new GameBoard(this.rows, this.cols);
-            this.aGameBoard.gridBoard(colorornot, players.get(0).getSymbol(), players.get(1).getSymbol(), players.get(0).getColor(), players.get(1).getColor());
-            this.aGameBoard.displayBoard(colorornot);
+            this.aGameBoard.gridBoard(this.colorornot, this.players.get(0).getSymbol(), this.players.get(1).getSymbol(), this.players.get(0).getColor(), this.players.get(1).getColor());
+            this.aGameBoard.displayBoard(this.colorornot);
         }
         catch (InvalidSize e) {
             System.out.println("Invalid input. Please input an integer between 10-50.");
@@ -137,18 +138,17 @@ public class Game {
         }
     }
 
-    public void playGame() throws InvalidAttack {
+    public void playGame() throws InvalidAttack, InvalidNewCell {
         Player player1 = this.players.get(0);
         Player player2 = this.players.get(1);
 
-        System.out.println("The order is: first " + player1.getName() + " and then " + player2.getName());
+        System.out.println("The order is: first " + player1.getName() + " and then " + player2.getName() + ".");
         System.out.println(player1.getName() + "'s initial cells are at the left part and " + player2.getName() + "'s initial cells are at the right part.");
 
         while (player1.getNumCells()>0 && player2.getNumCells()>0){
             for(int i = 0; i < this.numPlayers; i++){
                 tryattack(i);
-
-
+                trynewcell(i);
 
                 int num1 = 0;
                 int num2 = 0;
@@ -175,7 +175,7 @@ public class Game {
             attack(i);
         }
         catch (InvalidAttack e) {
-            System.out.println("Invalid input. Please input the coordinate of one of your opponent's cells");
+            System.out.println("Invalid input. Please input the coordinate of one of your opponent's live cells!");
             tryattack(i);
         }
     }
@@ -183,16 +183,16 @@ public class Game {
     public void attack(int i) throws InvalidAttack {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print(this.players.get(i).getName() + ", please input the row number of one of your opponent's cells that you want to attack:");
+        System.out.print(this.players.get(i).getName() + ", please input the row number of one of your opponent's live cells that you want to attack: ");
         while(!scanner.hasNextInt()){
-            System.out.print("Invalid input, please input an integer:");
+            System.out.print("Invalid input, please input an integer: ");
             scanner.nextLine();
         }
         int row = scanner.nextInt();
 
-        System.out.print(this.players.get(i).getName() + ", please input the column number of one of your opponent's cells that you want to attack:");
+        System.out.print(this.players.get(i).getName() + ", please input the column number of one of your opponent's live cells that you want to attack: ");
         while(!scanner.hasNextInt()){
-            System.out.print("Invalid input, please input an integer:");
+            System.out.print("Invalid input, please input an integer: ");
             scanner.nextLine();
         }
         int col = scanner.nextInt();
@@ -210,7 +210,54 @@ public class Game {
         }
         this.aGameBoard.GetContent(row-1, col-1).SetGridStatus(GridStatus.DEAD);
         this.aGameBoard.GetContent(row-1, col-1).SetGridSymbol(" ");
+    }
 
+    public void trynewcell(int i) throws InvalidNewCell {
+        try {
+            newCell(i);
+        }
+        catch (InvalidNewCell e) {
+            System.out.println("Invalid input. Please input the coordinate of one dead cell.");
+            trynewcell(i);
+        }
+    }
+
+    public void newCell(int i) throws InvalidNewCell {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print(this.players.get(i).getName() + ", please input the row number of the coordinate that you want to add a new live cell: ");
+        while(!scanner.hasNextInt()){
+            System.out.print("Invalid input, please input an integer: ");
+            scanner.nextLine();
+        }
+        int row = scanner.nextInt();
+
+        System.out.print(this.players.get(i).getName() + ", please input the column number of the coordinate that you want to add a new live cell: ");
+        while(!scanner.hasNextInt()){
+            System.out.print("Invalid input, please input an integer: ");
+            scanner.nextLine();
+        }
+        int col = scanner.nextInt();
+
+        if (row <= 0 || row > this.rows || col <= 0 || col > this.cols || this.aGameBoard.GetContent(row - 1, col - 1).getGridStatus() != GridStatus.DEAD) {
+                throw new InvalidNewCell();
+        }
+
+        if (i == 0){
+            this.aGameBoard.GetContent(row-1, col-1).SetGridStatus(GridStatus.ALIVE_1);
+            this.aGameBoard.GetContent(row-1, col-1).SetGridSymbol(this.players.get(0).getSymbol());
+            if(this.colorornot){
+                this.aGameBoard.GetContent(row-1, col-1).SetGridColor(this.players.get(0).getColor());
+            }
+        }
+
+        if (i == 1){
+            this.aGameBoard.GetContent(row-1, col-1).SetGridStatus(GridStatus.ALIVE_2);
+            this.aGameBoard.GetContent(row-1, col-1).SetGridSymbol(this.players.get(1).getSymbol());
+            if(this.colorornot){
+                this.aGameBoard.GetContent(row-1, col-1).SetGridColor(this.players.get(1).getColor());
+            }
+        }
     }
 
     public void Generation(){
