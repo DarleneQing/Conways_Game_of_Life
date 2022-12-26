@@ -5,6 +5,7 @@ public class Grid {
     private String symbol;
     private String color;
     private GridStatus status;
+    private GridStatus tempstatus;
 
     public enum GridStatus{
         ALIVE_1,
@@ -16,18 +17,27 @@ public class Grid {
         this.symbol = grid_symbol;
         this.color = grid_color;
         this.status = status;
+        this.tempstatus = status;
     }
 
     public String getGridSymbol(){
-        return symbol;
+        return this.symbol;
     }
 
     public String getGridColor(){
-        return color;
+        return this.color;
     }
 
     public GridStatus getGridStatus(){
-        return status;
+        return this.status;
+    }
+
+    public GridStatus getTempstatus(){
+        return this.tempstatus;
+    }
+
+    public void SetTempstatus(GridStatus status){
+        this.tempstatus = status;
     }
 
     public void SetGridStatus(GridStatus status){

@@ -35,8 +35,11 @@ public abstract class Player {
         return this.numGens;
     }
 
+    public void setNumGens(int num){
+        this.numGens = num;
+    }
+
     public void setNumCells(int num){
         this.numCells = num;
     }
-
 }

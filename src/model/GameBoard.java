@@ -47,7 +47,6 @@ public class GameBoard {
                 }
             }
         }
-
     }
 
     public void displayBoard(boolean colorornot){

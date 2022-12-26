@@ -149,6 +149,9 @@ public class Game {
             for(int i = 0; i < this.numPlayers; i++){
                 tryattack(i);
                 trynewcell(i);
+                Generation();
+                player1.setNumGens(player1.getNumGens()+1);
+                player2.setNumGens(player2.getNumGens()+1);
 
                 int num1 = 0;
                 int num2 = 0;
@@ -261,6 +264,67 @@ public class Game {
     }
 
     public void Generation(){
+        for(int i=0; i<this.rows; i++) {
+            for(int j = 0; j < this.cols; j++) {
+                this.aGameBoard.GetContent(i, j).SetTempstatus(this.aGameBoard.GetContent(i, j).getGridStatus());
+            }
+        }
+        for(int i=0; i<this.rows; i++){
+            for(int j=0; j<this.cols; j++){
+                if(this.aGameBoard.GetContent(i, j).getGridStatus() == GridStatus.DEAD){
+                    int count1 = 0;
+                    int count2 = 0;
+                    for(int k=i-1; k<=i+1; k++){
+                        for(int m=j-1; m<=j+1; m++){
+                            if(k>=0 && k<this.rows && m>=0 && m<this.cols){
+                                if(this.aGameBoard.GetContent(k, m).getGridStatus() == GridStatus.ALIVE_1){
+                                    count1++;
+                                }
+                                if(this.aGameBoard.GetContent(k, m).getGridStatus() == GridStatus.ALIVE_2){
+                                    count2++;
+                                }
+                            }
+                        }
+                    }
+                    if((count1 + count2) == 3 && count1>=2){
+                        this.aGameBoard.GetContent(i, j).SetTempstatus(GridStatus.ALIVE_1);
+                        this.aGameBoard.GetContent(i, j).SetGridSymbol(this.players.get(0).getSymbol());
+                        if(this.colorornot){
+                            this.aGameBoard.GetContent(i, j).SetGridColor(this.players.get(0).getColor());
+                        }
+                    }
+                    if((count1 + count2) == 3 && count2>=2){
+                        this.aGameBoard.GetContent(i, j).SetTempstatus(GridStatus.ALIVE_2);
+                        this.aGameBoard.GetContent(i, j).SetGridSymbol(this.players.get(1).getSymbol());
+                        if(this.colorornot){
+                            this.aGameBoard.GetContent(i, j).SetGridColor(this.players.get(1).getColor());
+                        }
+                    }
+                }
 
+                if(this.aGameBoard.GetContent(i, j).getGridStatus() != GridStatus.DEAD){
+                    int count = 0;
+                    for(int k=i-1; k<=i+1; k++){
+                        for(int m=j-1; m<=j+1; m++){
+                            if(k>=0 && k<this.rows && m>=0 && m<this.cols) {
+                                // The cell itself is counted but it's alive.
+                                if (this.aGameBoard.GetContent(k, m).getGridStatus() == GridStatus.DEAD) {
+                                    count++;
+                                }
+                            }
+                        }
+                    }
+                    if(count <= 4 || count >= 7){
+                        this.aGameBoard.GetContent(i, j).SetTempstatus(GridStatus.DEAD);
+                        this.aGameBoard.GetContent(i, j).SetGridSymbol(" ");
+                    }
+                }
+            }
+        }
+        for(int i=0; i<this.rows; i++) {
+            for(int j = 0; j < this.cols; j++) {
+                this.aGameBoard.GetContent(i, j).SetGridStatus(this.aGameBoard.GetContent(i, j).getTempstatus());
+            }
+        }
     }
 }
