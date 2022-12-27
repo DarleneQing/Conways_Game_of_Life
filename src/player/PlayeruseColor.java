@@ -6,5 +6,4 @@ public class PlayeruseColor extends Player{
         super(name, "*", color);
     }
 
-
 }

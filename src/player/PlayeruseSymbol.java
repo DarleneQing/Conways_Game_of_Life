@@ -6,6 +6,4 @@ public class PlayeruseSymbol extends Player{
         super(name, symbol, "");
     }
 
-
-
 }
