@@ -1,4 +1,4 @@
-package model;
+package player;
 
 public class PlayeruseColor extends Player{
 

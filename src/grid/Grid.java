@@ -1,4 +1,4 @@
-package model;
+package grid;
 
 public class Grid {
 

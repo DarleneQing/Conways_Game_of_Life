@@ -1,5 +1,4 @@
-package model;
-
+import Game.Game;
 import exceptions.InvalidAttack;
 import exceptions.InvalidNewCell;
 

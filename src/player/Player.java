@@ -1,4 +1,4 @@
-package model;
+package player;
 
 public abstract class Player {
     private final String name;

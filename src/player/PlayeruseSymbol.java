@@ -1,4 +1,4 @@
-package model;
+package player;
 
 public class PlayeruseSymbol extends Player{
 
