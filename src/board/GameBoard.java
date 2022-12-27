@@ -1,11 +1,12 @@
-package model;
+package board;
 
 import exceptions.InvalidSize;
+import grid.Grid;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static model.Grid.GridStatus;
+import static grid.Grid.GridStatus;
 
 public class GameBoard {
     private final int rows;

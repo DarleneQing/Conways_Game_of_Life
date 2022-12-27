@@ -1,9 +1,14 @@
-package model;
+package Game;
 
 import exceptions.InvalidAttack;
 import exceptions.InvalidNewCell;
 import exceptions.InvalidSize;
-import static model.Grid.GridStatus;
+import board.GameBoard;
+import player.Player;
+import player.PlayeruseColor;
+import player.PlayeruseSymbol;
+
+import static grid.Grid.GridStatus;
 
 import java.util.*;
 
