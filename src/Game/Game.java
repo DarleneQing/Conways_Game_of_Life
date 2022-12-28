@@ -173,8 +173,19 @@ public class Game {
                 player1.setNumCells(num1);
                 player2.setNumCells(num2);
                 this.aGameBoard.displayBoard(colorornot);
-
             }
+        }
+
+        if (player1.getNumCells() == 0){
+            System.out.println(player2.getName() + " wins the game!");
+        }
+
+        if (player2.getNumCells() == 0){
+            System.out.println(player1.getName() + " wins the game!");
+        }
+
+        if (player1.getNumCells() == 0 && player2.getNumCells() == 0){
+            System.out.println("Nobody wins the game!");
         }
     }
 
