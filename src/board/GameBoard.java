@@ -75,31 +75,12 @@ public class GameBoard {
             for (int j = 0; j < this.cols; j++){
                 Grid aGrid = this.game_board.get(i).get(j);
                 if (!colorornot){
-                    String this_symbol = aGrid.getGridSymbol();
-                    System.out.print(this_symbol+" |");
+                    BoardContext boardContext = new BoardContext(new BoarduseSymbol());
+                    boardContext.display(aGrid);
                 }
                 else{
-                    if (Objects.equals(aGrid.getGridColor(), "red")){
-                        System.out.print("\u001B[31m" + aGrid.getGridSymbol() + "\u001B[0m" + " |");
-                    }
-                    else if (Objects.equals(aGrid.getGridColor(), "green")){
-                        System.out.print("\u001B[32m" + aGrid.getGridSymbol() + "\u001B[0m" + " |");
-                    }
-                    else if (Objects.equals(aGrid.getGridColor(), "yellow")){
-                        System.out.print("\u001B[33m" + aGrid.getGridSymbol() + "\u001B[0m" + " |");
-                    }
-                    else if (Objects.equals(aGrid.getGridColor(), "blue")){
-                        System.out.print("\u001B[34m" + aGrid.getGridSymbol() + "\u001B[0m" + " |");
-                    }
-                    else if (Objects.equals(aGrid.getGridColor(), "purple")){
-                        System.out.print("\u001B[35m" + aGrid.getGridSymbol() + "\u001B[0m" + " |");
-                    }
-                    else if (Objects.equals(aGrid.getGridColor(), "cran")){
-                        System.out.print("\u001B[36m" + aGrid.getGridSymbol() + "\u001B[0m" + " |");
-                    }
-                    else{
-                        System.out.print("  |");
-                    }
+                    BoardContext boardContext = new BoardContext(new BoarduseColor());
+                    boardContext.display(aGrid);
                 }
             }
             System.out.println();
