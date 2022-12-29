@@ -91,27 +91,30 @@ public class Game {
 
         while (player1.getNumCells()>0 && player2.getNumCells()>0){
             for(int i = 0; i < this.numPlayers; i++){
-                tryattack(i);
-                trynewcell(i);
-                Generation();
-                player1.setNumGens(player1.getNumGens()+1);
-                player2.setNumGens(player2.getNumGens()+1);
+                if (player1.getNumCells()>0 && player2.getNumCells()>0){
+                    tryattack(i);
+                    trynewcell(i);
+                    Generation();
+                    player1.setNumGens(player1.getNumGens()+1);
+                    player2.setNumGens(player2.getNumGens()+1);
 
-                int num1 = 0;
-                int num2 = 0;
-                for(int j=0; j<this.rows; j++){
-                    for(int k=0; k<this.cols; k++){
-                        if(this.aGameBoard.GetContent(j, k).getGridStatus() == GridStatus.ALIVE_1){
-                            num1 ++;
-                        }
-                        if(this.aGameBoard.GetContent(j, k).getGridStatus() == GridStatus.ALIVE_2){
-                            num2 ++;
+                    int num1 = 0;
+                    int num2 = 0;
+                    for(int j=0; j<this.rows; j++){
+                        for(int k=0; k<this.cols; k++){
+                            if(this.aGameBoard.GetContent(j, k).getGridStatus() == GridStatus.ALIVE_1){
+                                num1 ++;
+                            }
+                            if(this.aGameBoard.GetContent(j, k).getGridStatus() == GridStatus.ALIVE_2){
+                                num2 ++;
+                            }
                         }
                     }
+
+                    player1.setNumCells(num1);
+                    player2.setNumCells(num2);
+                    this.aGameBoard.displayBoard(colorornot);
                 }
-                player1.setNumCells(num1);
-                player2.setNumCells(num2);
-                this.aGameBoard.displayBoard(colorornot);
             }
         }
 
