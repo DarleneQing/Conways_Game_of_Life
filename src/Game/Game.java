@@ -282,4 +282,12 @@ public class Game {
             }
         }
     }
+
+    public GameBoard getBoard() {
+        return this.aGameBoard;
+    }
+
+    public List<Player> getPlayers() {
+        return this.players;
+    }
 }

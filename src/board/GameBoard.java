@@ -91,4 +91,11 @@ public class GameBoard {
         return this.game_board.get(row).get(col);
     }
 
+    public int getRows() {
+        return rows;
+    }
+
+    public int getCols() {
+        return cols;
+    }
 }
