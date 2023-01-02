@@ -5,7 +5,7 @@ import main.exceptions.InvalidAttack;
 import main.exceptions.InvalidNewCell;
 
 public class Main {
-
+    // only for test
     public static int test() {
         return 1;
     }
