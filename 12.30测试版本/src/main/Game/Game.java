@@ -285,11 +285,11 @@ public class Game {
             }
         }
     }
-
+    // only for test
     public GameBoard getBoard() {
         return this.aGameBoard;
     }
-
+    // only for test
     public List<Player> getPlayers() {
         return this.players;
     }
