@@ -85,15 +85,15 @@ public class GameBoard {
             System.out.println();
         }
     }
-
+    // only for test
     public Grid GetContent(int row, int col){
         return this.game_board.get(row).get(col);
     }
-
+    // only for test
     public int getRows() {
         return rows;
     }
-
+    // only for test
     public int getCols() {
         return cols;
     }
