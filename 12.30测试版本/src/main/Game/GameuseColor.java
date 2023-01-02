@@ -30,9 +30,9 @@ public class GameuseColor implements GameInterface{
         Scanner scanner = new Scanner(System.in);
         List<String> colorList = new ArrayList<>(6);
         colorList.add("red"); colorList.add("green"); colorList.add("yellow");
-        colorList.add("blue"); colorList.add("cran"); colorList.add("purple");
+        colorList.add("blue"); colorList.add("cyan"); colorList.add("purple");
 
-        System.out.print("Please input a color from the color list: 'red', 'green', 'yellow', 'blue', 'cran', 'purple': ");
+        System.out.print("Please input a color from the color list: 'red', 'green', 'yellow', 'blue', 'cyan', 'purple': ");
         String playerColor = scanner.nextLine();
         while (!colorList.contains(playerColor)) {
             System.out.print("Please type in a correct color: ");
