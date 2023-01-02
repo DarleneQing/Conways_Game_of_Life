@@ -22,7 +22,7 @@ public class BoarduseColor implements Board{
         else if (Objects.equals(grid.getGridColor(), "purple")){
             System.out.print("\u001B[35m" + grid.getGridSymbol() + "\u001B[0m" + " |");
         }
-        else if (Objects.equals(grid.getGridColor(), "cran")){
+        else if (Objects.equals(grid.getGridColor(), "cyan")){
             System.out.print("\u001B[36m" + grid.getGridSymbol() + "\u001B[0m" + " |");
         }
         else{
